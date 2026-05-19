@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: font2;
+ src: url(/font/Roag-Bold.otf);
+}
+@font-face {
+  font-family: font3;
+ src: url(/font/Roag-Regular.otf);
+}
+
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

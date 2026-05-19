@@ -1,0 +1,571 @@
+.page {
+  width: 100vw;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: #020416;
+  font-family: font3;
+}
+
+.hero {
+  position: relative;
+  width: 100vw;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: clamp(22px, 5vw, 72px);
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(36, 98, 255, 0.34), transparent 28%),
+    radial-gradient(circle at 18% 82%, rgba(0, 76, 255, 0.3), transparent 32%),
+    radial-gradient(circle at 86% 72%, rgba(20, 45, 120, 0.46), transparent 38%),
+    linear-gradient(135deg, #020313 0%, #040827 52%, #020313 100%);
+}
+
+/* Fondo premium, tipo lente óptico */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  z-index: -5;
+  background:
+    conic-gradient(
+      from 210deg at 50% 48%,
+      transparent 0deg,
+      rgba(18, 73, 230, 0.1) 42deg,
+      rgba(73, 132, 255, 0.22) 74deg,
+      transparent 112deg,
+      transparent 178deg,
+      rgba(17, 59, 180, 0.2) 216deg,
+      transparent 276deg,
+      rgba(61, 118, 255, 0.14) 318deg,
+      transparent 360deg
+    );
+  filter: blur(36px);
+  opacity: 0.9;
+  animation: auraMove 18s ease-in-out infinite alternate;
+}
+
+/* Textura fina sin recargar GPU */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -4;
+  opacity: 0.32;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(circle at center, black 0%, transparent 72%);
+}
+
+.bgOrbOne,
+.bgOrbTwo,
+.bgRing {
+  position: absolute;
+  pointer-events: none;
+  z-index: -3;
+}
+
+/* Anillo grande izquierdo */
+.bgOrbOne {
+  width: min(92vw, 900px);
+  aspect-ratio: 1;
+  left: -34%;
+  bottom: -32%;
+  border-radius: 50%;
+  border: clamp(82px, 10vw, 150px) solid rgba(0, 82, 255, 0.45);
+  box-shadow:
+    inset 0 0 80px rgba(0, 82, 255, 0.22),
+    0 0 90px rgba(0, 82, 255, 0.18);
+  opacity: 0.78;
+  animation: orbOneFloat 14s ease-in-out infinite alternate;
+}
+
+/* Anillo grande derecho */
+.bgOrbTwo {
+  width: min(88vw, 980px);
+  aspect-ratio: 1;
+  right: -36%;
+  top: 30%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at center, transparent 0 42%, rgba(24, 57, 160, 0.22) 43% 64%, transparent 65%),
+    radial-gradient(circle at center, transparent 0 58%, rgba(0, 58, 190, 0.12) 59% 74%, transparent 75%);
+  opacity: 0.9;
+  animation: orbTwoFloat 18s ease-in-out infinite alternate;
+}
+
+/* Lente superior, animación continua sin salto */
+.bgRing {
+  width: min(44vw, 430px);
+  aspect-ratio: 1;
+  top: 10%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translateX(-50%) rotate(0deg);
+  background:
+    conic-gradient(
+      from 0deg,
+      transparent 0deg 32deg,
+      rgba(64, 125, 255, 0.72) 34deg 82deg,
+      transparent 84deg 144deg,
+      rgba(125, 170, 255, 0.92) 146deg 204deg,
+      transparent 206deg 278deg,
+      rgba(0, 88, 255, 0.62) 280deg 326deg,
+      transparent 328deg 360deg
+    );
+  filter:
+    blur(0.4px)
+    drop-shadow(0 0 30px rgba(0, 92, 255, 0.45));
+  opacity: 0.34;
+  mask-image: radial-gradient(circle, transparent 0 34%, black 35% 55%, transparent 56%);
+  animation: ringSpin 38s linear infinite;
+}
+
+.content {
+  position: relative;
+  width: min(100%, 900px);
+  min-height: min(720px, calc(100dvh - 48px));
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: clamp(28px, 4vw, 44px);
+  text-align: center;
+}
+
+/* Halo central detrás del contenido */
+.content::before {
+  content: "";
+  position: absolute;
+  width: min(86vw, 760px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  z-index: -2;
+  background:
+    radial-gradient(circle, rgba(34, 93, 255, 0.22) 0%, rgba(4, 9, 42, 0.15) 42%, transparent 68%);
+  filter: blur(24px);
+  animation: centerGlow 6s ease-in-out infinite alternate;
+}
+
+.logoStage {
+  position: relative;
+  width: clamp(180px, 28vw, 320px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+}
+
+.logoGlow {
+  position: absolute;
+  inset: 4%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(70, 126, 255, 0.42), rgba(0, 60, 210, 0.18) 44%, transparent 68%);
+  filter: blur(20px);
+  animation: logoGlowPulse 4.5s ease-in-out infinite alternate;
+}
+
+.logoBox {
+  position: relative;
+  width: 72%;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #020416;
+  box-shadow:
+    0 0 0 1px rgba(156, 190, 255, 0.16),
+    0 0 42px rgba(0, 90, 255, 0.38),
+    inset 0 0 44px rgba(0, 80, 255, 0.18);
+  animation: logoBreath 5s ease-in-out infinite alternate;
+}
+
+.logoBox::before {
+  content: "";
+  position: absolute;
+  inset: -18%;
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      rgba(112, 164, 255, 0.95) 68deg,
+      transparent 118deg,
+      transparent 180deg,
+      rgba(0, 90, 255, 0.95) 240deg,
+      transparent 310deg,
+      transparent 360deg
+    );
+  animation: logoRingSpin 14s linear infinite;
+}
+
+.logoBox::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  z-index: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 38%, rgba(18, 43, 110, 0.42), transparent 45%),
+    #020416;
+}
+
+.logo {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  user-select: none;
+  mix-blend-mode: screen;
+
+  filter:
+    brightness(1.2)
+    contrast(1.15)
+    drop-shadow(0 0 18px rgba(100, 148, 255, 0.44));
+}
+
+/* Ya no hace barrido vertical brusco. Ahora es una luz suave orbital */
+.scanLine {
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  border: 1px solid rgba(172, 202, 255, 0.34);
+  box-shadow:
+    0 0 22px rgba(80, 130, 255, 0.42),
+    inset 0 0 22px rgba(80, 130, 255, 0.22);
+  opacity: 0.52;
+  animation: scanPulse 3.8s ease-in-out infinite alternate;
+}
+
+.textBlock {
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: clamp(0.72rem, 1.5vw, 0.86rem);
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: rgba(204, 219, 255, 0.72);
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(3.2rem, 10vw, 7.8rem);
+  font-family: font2;
+  line-height: 0.88;
+  letter-spacing: -0.075em;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-wrap: balance;
+  text-shadow:
+    0 0 24px rgba(64, 124, 255, 0.54),
+    0 18px 52px rgba(0, 0, 0, 0.48);
+}
+
+.subtitle {
+  width: min(100%, 590px);
+  margin: 0;
+  font-size: clamp(0.95rem, 2vw, 1.18rem);
+  line-height: 1.7;
+  color: rgba(225, 233, 255, 0.76);
+}
+
+.loader {
+  display: flex;
+  gap: 9px;
+  padding-top: 8px;
+}
+
+.loader span {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(178, 204, 255, 0.95);
+  box-shadow: 0 0 14px rgba(72, 132, 255, 0.95);
+  animation: loaderDot 1.25s ease-in-out infinite;
+}
+
+.loader span:nth-child(2) {
+  animation-delay: 0.16s;
+}
+
+.loader span:nth-child(3) {
+  animation-delay: 0.32s;
+}
+
+.socials {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.socialButton {
+  min-width: 138px;
+  height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 18px;
+  border-radius: 999px;
+  color: #ffffff;
+  text-decoration: none;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.105), rgba(255, 255, 255, 0.055));
+  border: 1px solid rgba(190, 213, 255, 0.17);
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.socialButton span {
+  width: 29px;
+  height: 29px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: #06113d;
+  background: #ffffff;
+}
+
+.socialButton small {
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.02em;
+}
+
+.socialButton:hover {
+  transform: translateY(-3px);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.075));
+  border-color: rgba(188, 216, 255, 0.42);
+  box-shadow:
+    0 22px 54px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(0, 90, 255, 0.25);
+}
+
+.socialButton:focus-visible {
+  outline: 3px solid rgba(122, 169, 255, 0.72);
+  outline-offset: 4px;
+}
+
+
+
+.footerTExt{
+    font-size: .7rem;
+}
+/* Animaciones suaves sin reset visual brusco */
+
+@keyframes auraMove {
+  from {
+    transform: translate3d(-1.5%, -1%, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(1.5%, 1%, 0) scale(1.04);
+  }
+}
+
+@keyframes orbOneFloat {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(22px, -18px, 0) scale(1.025);
+  }
+}
+
+@keyframes orbTwoFloat {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(-26px, 18px, 0) scale(1.03);
+  }
+}
+
+@keyframes ringSpin {
+  from {
+    transform: translateX(-50%) rotate(0deg);
+  }
+
+  to {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}
+
+@keyframes logoRingSpin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes centerGlow {
+  from {
+    opacity: 0.56;
+    transform: scale(0.98);
+  }
+
+  to {
+    opacity: 0.88;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes logoGlowPulse {
+  from {
+    opacity: 0.55;
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 0.96;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes logoBreath {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.035);
+  }
+}
+
+@keyframes scanPulse {
+  from {
+    opacity: 0.32;
+    transform: scale(0.94);
+  }
+
+  to {
+    opacity: 0.72;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes loaderDot {
+  0%, 100% {
+    opacity: 0.38;
+    transform: translateY(0) scale(0.9);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(-6px) scale(1.12);
+  }
+}
+
+@media (max-width: 720px) {
+  .hero {
+    padding: 22px;
+  }
+
+  .content {
+    min-height: calc(100dvh - 44px);
+    gap: 30px;
+  }
+
+  .logoStage {
+    width: clamp(170px, 54vw, 240px);
+  }
+
+  .title {
+    font-size: clamp(3rem, 15vw, 4.9rem);
+  }
+
+  .subtitle {
+    max-width: 340px;
+    font-size: 0.95rem;
+  }
+
+  .socials {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .socialButton {
+    min-width: 0;
+    flex: 1 1 100%;
+    max-width: 320px;
+  }
+
+  .bgOrbOne {
+    width: 122vw;
+    left: -66%;
+    bottom: -20%;
+  }
+
+  .bgOrbTwo {
+    width: 125vw;
+    right: -78%;
+    top: 30%;
+  }
+
+  .bgRing {
+    width: 78vw;
+    top: 13%;
+  }
+}
+
+@media (max-height: 640px) {
+  .content {
+    gap: 18px;
+  }
+
+  .logoStage {
+    width: clamp(140px, 24vw, 210px);
+  }
+
+  .title {
+    font-size: clamp(2.8rem, 9vw, 5.4rem);
+  }
+
+  .subtitle {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero::before,
+  .bgOrbOne,
+  .bgOrbTwo,
+  .bgRing,
+  .content::before,
+  .logoGlow,
+  .logoBox,
+  .logoBox::before,
+  .scanLine,
+  .loader span {
+    animation: none;
+  }
+
+  .socialButton {
+    transition: none;
+  }
+}
